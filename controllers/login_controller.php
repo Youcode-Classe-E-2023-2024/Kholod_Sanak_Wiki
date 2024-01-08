@@ -1,20 +1,34 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["signin"])) {
-    $email = htmlspecialchars($_POST["email"]);
-    $password = htmlspecialchars($_POST["password"]);
-    $user= new User();
+    // Validate and sanitize user inputs
+    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
-    // Assuming CheckUser returns user data or false if the user doesn't exist
+    if (!$email || !$password) {
+        echo "Invalid email or password format. Please check your inputs.";
+        exit;
+    }
+
+    $user = new User();
+    $regular = "auteur";
+    $admin = "admin";
+
     $userChecker = $user->CheckUser($email, $db);
-    //var_dump($userChecker);
+    
 
     if ($userChecker) {
         // User exists, now verify the password
         if (password_verify($password, $userChecker["password"])) {
-            User::login($userChecker["user_id"]);
-            header("Location: index.php?page=dashboard");
-            exit();
+            if ($userChecker["role"]== "auteur") {
+                //dd($checkAuthor);
+                $user->loginAuthor($userChecker["user_id"]);
+            } elseif ($userChecker ["role"]== "admin") {
+                //dd("ana admin");
+                $user->loginAdmin($userChecker["user_id"]);
 
+            } else {
+                echo "Invalid user role. Please contact support.";
+            }
         } else {
             echo "Invalid email or password. Please try again.";
         }
@@ -22,3 +36,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["signin"])) {
         echo "User not found. Please check your email and try again.";
     }
 }
+?>
