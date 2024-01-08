@@ -22,7 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signup'])) {
             if ($userChecker) {
                 echo "User exist";
             } else {
+
                 $user->AddUser($logemail, $password, $logname, $fileName, $db);
+                $user->updateUserRole($db);
 
                 header("Location: index.php?page=login");
                 exit();
