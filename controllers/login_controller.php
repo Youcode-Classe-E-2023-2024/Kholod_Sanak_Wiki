@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["signin"])) {
     $admin = "admin";
 
     $userChecker = $user->CheckUser($email, $db);
-    
+
 
     if ($userChecker) {
         // User exists, now verify the password
