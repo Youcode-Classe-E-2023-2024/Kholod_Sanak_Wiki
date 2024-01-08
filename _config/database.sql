@@ -5,7 +5,7 @@ create table User
     password text not null,
     username varchar(255) null,
     picture  text null,
-    role ENUM('admin','auteur') default 'auteur' not null,
+    role ENUM('admin','auteur') not null,
     constraint user_email_uindex unique (email),
     constraint user_id_uindex unique (user_id)
 );
@@ -15,8 +15,9 @@ create table Wiki
     wiki_id bigint auto_increment primary key,
     title varchar(255) not null,
     description varchar(500) not null,
-    wiki_date VARCHAR(50) NOT NULL,
-    archived   TINYINT(1) DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP null,
+    status   ENUM('published','archived') not null,
     wiki_picture text NOT NULL,
     creator_id BIGINT ,
     FOREIGN KEY (creator_id) REFERENCES User (user_id) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -27,7 +28,9 @@ create table Wiki
 create table Tag
 (
     tag_id bigint auto_increment primary key,
-    tag varchar(255) not null
+    tag varchar(255) not null,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP null
 
 );
 
@@ -42,5 +45,7 @@ create table Wiki_Tag
 create table Category
 (
     category_id bigint auto_increment primary key,
-    category varchar(255) not null
+    category varchar(255) not null,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP null
 );
