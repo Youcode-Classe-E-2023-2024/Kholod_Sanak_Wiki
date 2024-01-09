@@ -59,26 +59,21 @@ signupBtn.addEventListener("click", function (event) {
     if(checker) sendRegisterInfos();
 })
 
-//const picture = document.getElementById("profile-picture");
 
 function sendRegisterInfos() {
     // Collect form data
     var formData = {
-        //profile_picture: picture.files[0],
         username: $("#username").val(),
         email: $("#email").val(),
         password: $("#passwordField").val(),
     };
-    //console.log(formData)
+    console.log(formData)
 
-    // Send the form data using AJAX
     $.ajax({
         type: "POST",
         url: "index.php?page=register",
         data: formData,
         signup: true,
-        // processData: false,
-        // contentType: false,
         success: function (data) {
 
             console.log(data);
@@ -86,7 +81,7 @@ function sendRegisterInfos() {
             if (data === "success") {
                 window.location.href = "index.php?page=login";
             } else if (data=== "User exist"){
-                alert("User exist");
+                alert(data);
             }
         }
     })
