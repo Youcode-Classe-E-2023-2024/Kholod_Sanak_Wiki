@@ -40,7 +40,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
         echo "User not found. Please check your email and try again.";
         exit;
     }
-    dd($_POST);
-    exit;
+
 }
 ?>
