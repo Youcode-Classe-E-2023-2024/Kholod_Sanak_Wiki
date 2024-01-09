@@ -1,7 +1,7 @@
 <?php
 ?>
 <header>
-    <?php include_once 'views/header_view.php'; ?>
+    <?php include_once 'views/components/_header.php'; ?>
 </header>
 
 <section class="text-gray-600 body-font">
@@ -105,5 +105,5 @@
         </div>
 </section>
 <footer>
-    <?php include_once 'views/footer_view.php'; ?>
+    <?php include_once 'views/components/_footer.php'; ?>
 </footer>
