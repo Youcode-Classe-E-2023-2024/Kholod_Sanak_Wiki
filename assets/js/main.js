@@ -5,8 +5,6 @@ function affiche() {
 
     let affErrPassword= document.getElementById("sp-password");
     let regexEmail=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-
-
     let Check=true;
 
     //Mail
@@ -29,22 +27,56 @@ function affiche() {
     else{
         affErrPassword.innerHTML = "";
     }
-
-
+    return Check;
 
 
 }
 
 
 
+const LoginBtn = document.getElementById("login-btn");
 
-
-
-const signinBtn = document.getElementById("signin-btn");
-
-
-signinBtn.addEventListener("click", function (event) {
+LoginBtn.addEventListener("click", function (event) {
     event.preventDefault();
-    //console.log("clicked");
-    affiche();
-})
+    let checker = affiche();
+    if(checker) sendLoginInfos();})
+
+function sendLoginInfos(){
+    var formData = {
+
+        email: $("#email").val(),
+        password: $("#passwordField").val(),
+    };
+    //console.log(formData)
+
+    // Send the form data using AJAX
+    $.ajax({
+        type: "POST",
+        url: "index.php?page=login",
+        data: formData,
+        signin: true,
+
+        success: function (data) {
+
+            console.log(data);
+
+            if (data === "success author") {
+                window.location.href = "index.php?page=home";
+                alert("Welcome to Wikis");
+            } else if(data== "success admin"){
+                window.location.href = "index.php?page=dashboard";
+                alert("Welcome to the Dashboard");
+            }
+            else if (data=== "Invalid email or password format. Please check your inputs."){
+                alert("Invalid email or password format");
+            }else if (data=== "Invalid user role. Please contact support."){
+                alert("Invalid user role. Please contact support.");
+            } else if (data=== "Invalid email or password. Please try again."){
+                alert("Invalid email or password. Please try again.");
+            }else if (data=== "User not found. Please check your email and try again."){
+                alert("User not found. Please check your email and try again.");
+            }
+        }
+    })
+
+}

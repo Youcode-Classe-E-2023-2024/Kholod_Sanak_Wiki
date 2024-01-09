@@ -47,6 +47,7 @@ function affiche() {
         affErrName.innerHTML = "";
     }
 
+    return Check;
 
 }
 
@@ -54,7 +55,40 @@ function affiche() {
 const signupBtn = document.getElementById("signup-btn");
 signupBtn.addEventListener("click", function (event) {
     event.preventDefault();
-    affiche();
+    let checker = affiche();
+    if(checker) sendRegisterInfos();
 })
 
+//const picture = document.getElementById("profile-picture");
 
+function sendRegisterInfos() {
+    // Collect form data
+    var formData = {
+        //profile_picture: picture.files[0],
+        username: $("#username").val(),
+        email: $("#email").val(),
+        password: $("#passwordField").val(),
+    };
+    //console.log(formData)
+
+    // Send the form data using AJAX
+    $.ajax({
+        type: "POST",
+        url: "index.php?page=register",
+        data: formData,
+        signup: true,
+        // processData: false,
+        // contentType: false,
+        success: function (data) {
+
+            console.log(data);
+
+            if (data === "success") {
+                window.location.href = "index.php?page=login";
+            } else if (data=== "User exist"){
+                alert("User exist");
+            }
+        }
+    })
+
+}

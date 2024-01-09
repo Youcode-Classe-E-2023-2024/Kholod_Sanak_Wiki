@@ -13,7 +13,7 @@
     <input  name="password" id="passwordField" class="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"type="password">
     <p><span class="text-red-500 font-semibold text-xs" id="sp-password"></span></p>
 
-    <button  name="signin" id="signin-btn" class="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700">Login</button>
+    <button  name="signin" id="login-btn" class="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700">Login</button>
     <div class="flex mt-6 justify-center text-xs">
         <a class="text-blue-400 hover:text-blue-500" href="index.php?page=register">Register</a>
     </div>

@@ -24,7 +24,7 @@
         <p><span class="text-red-500 font-semibold	text-xs" id="sp-password"></span></p>
 
 
-        <button name="signup" id="signup-btn" class="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700">Register</button>
+        <button  type="button" name="signup" id="signup-btn" class="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700">Register</button>
         <div class="flex mt-6 justify-center text-xs">
             <a class="text-blue-400 hover:text-blue-500" href="index.php?page=login">Login</a>
         </div>
@@ -34,3 +34,4 @@
 </div>
 
 <script src="<?= PATH ?>assets/js/form_validation.js"></script>
+
