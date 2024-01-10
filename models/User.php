@@ -61,8 +61,7 @@ class User
     }
     function logout () {
         session_destroy();
-        header("Location: index.php?page=login");
-        exit();
+
     }
 
     function getUsers($db) {

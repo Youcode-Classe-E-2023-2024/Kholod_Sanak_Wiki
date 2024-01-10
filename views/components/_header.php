@@ -14,28 +14,26 @@
             </svg>
         </button>
     </div>
+    <!--search -->
     <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
-        <div class='max-w-md mx-auto'>
-            <div class="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
-                <div class="grid place-items-center h-full w-12 text-gray-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                </div>
+        <?php include "views/components/_searchbar.php";?>
 
-                <input
-                    class="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
-                    type="text"
-                    id="search"
-                    placeholder="Search something.." />
-            </div>
-        </div>
     </ul>
-    <a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" href="index.php?page=login">Sign In</a>
-    <a class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" href="index.php?page=register">Sign up</a>
-    <!-- when it is logged -->
-    <!--    <a class="hidden lg:inline-block lg:ml-auto lg:mr-3  py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white  font-bold  rounded-xl transition duration-200" href="index.php?page=listWiki">Manage Wikis</a>-->
-    <!--    <a class="hidden lg:inline-block py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900  font-bold rounded-xl transition duration-200" href="index.php?page=logout">Logout</a>-->
+    <?php if (isset($_SESSION["login"])) { ?>
+        <!-- User is logged in -->
+        <a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" href="index.php?page=wikimanage">Manage Wikis</a>
+        <form method="post" action="index.php?page=home">
+            <button type="submit" name="logout" class="hidden lg:inline-block py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200">
+                Logout
+            </button>
+        </form>
+    <?php } else { ?>
+        <!-- User is not logged in -->
+        <a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200" href="index.php?page=login">Sign In</a>
+        <a class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" href="index.php?page=register">Sign up</a>
+    <?php } ?>
+
+
 
 </nav>
 <div class="navbar-menu relative z-50 hidden">

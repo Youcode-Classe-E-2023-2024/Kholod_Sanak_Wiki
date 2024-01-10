@@ -35,10 +35,9 @@
 
                 </div>
                 <!--logout-->
-                <form method="post" action="index.php?page=logout" >
+                <form method="post" action="index.php?page=dashboard" >
                     <button type="submit" name="logout" class="bg-red-500 text-white px-3 py-2 rounded-md flex items-center">
                         Logout
-
                     </button>
                 </form>
             </div>

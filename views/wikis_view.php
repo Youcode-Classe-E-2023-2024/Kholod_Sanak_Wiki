@@ -36,7 +36,7 @@
 
                 </div>
                 <!--logout-->
-                <form method="post" action="index.php?page=logout" >
+                <form method="post" action="index.php?page=dashboard" >
                     <button type="submit" name="logout" class="bg-red-500 text-white px-3 py-2 rounded-md flex items-center">
                         Logout
 
@@ -119,11 +119,8 @@
         <?php include "views/wikiform_view.php";?>
 
     </div>
-</div>
-</div>
-</main>
-</div>
-</div>
+
+
 <script src="<?= PATH ?>assets/js/wiki.js"></script>
 <script>
     let admin = false;
