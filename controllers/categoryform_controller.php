@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Adding a new category
     if (isset($_POST["action"]) && $_POST["action"] === "add") {
         $title = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_STRING);
-        if ($title !== null && $title !== false && preg_match('/^[a-zA-Z]+$/', $title)) {
+        if ($title !== null && $title !== false && preg_match('/^[a-zA-Z\s]+$/', $title)) {
             $result = $category->addCategory($title);
 
             if ($result) {

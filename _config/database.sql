@@ -37,9 +37,9 @@ create table Tag
 create table Wiki_Tag
 (
     tag_id bigint,
-    category_id bigint,
+    wiki_id bigint,
     foreign key (tag_id) REFERENCES Tag (tag_id)  ON UPDATE CASCADE ON DELETE CASCADE,
-    foreign key (category_id) REFERENCES Category (category_id)  ON UPDATE CASCADE ON DELETE CASCADE
+    foreign key (wiki_id) REFERENCES Wiki (wiki_id)  ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 create table Category
