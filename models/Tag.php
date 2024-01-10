@@ -93,11 +93,13 @@ class Tag
         $stmt->execute();
     }
 
-    static function update_wiki_tag ($tag) {
+    static function update_wiki_tag ($tag,$wikiId) {
         global $db;
-        $sql = "UPDATE wiki_tag  SET tag_id = :tag_id";
+        $sql = "UPDATE wiki_tag  SET tag_id = :tag_id WHERE wiki_id= :wiki_id ";
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':tag_id', $tag);
+        $stmt->bindParam(':wiki_id', $wikiId);
+
         $stmt->execute();
     }
 }
