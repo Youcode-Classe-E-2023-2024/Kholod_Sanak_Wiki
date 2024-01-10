@@ -89,8 +89,8 @@ $(document).on('click', '#archive-wiki', function () {
 
 ////////////////////////////////// Delete Wiki
 //delete
-$(document).on('click', '#delete-wiki', function () {
-
+$(document).on('click', '.delete-wiki', function () {
+    //console.log("clicked");
     let wikiId = $(this).data('wiki-id');
     //console.log(wikiId)
 
