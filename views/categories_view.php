@@ -174,16 +174,4 @@
     }
     getCategories();
 
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
