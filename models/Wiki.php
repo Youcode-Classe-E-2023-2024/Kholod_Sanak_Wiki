@@ -151,20 +151,28 @@ class Wiki {
     /**
      * @return array|false
      */
-    function getAllWikiInfo() {
+    public function getAllWikiInfo() {
         global $db;
 
-        $sql = "SELECT wiki.*, tag.*, category.*, user.* FROM wiki_tag
-                                                  JOIN wiki ON wiki_tag.wiki_id = wiki.wiki_id
-                                                  JOIN tag ON wiki_tag.tag_id = tag.tag_id
-                                                  JOIN category ON wiki.cat_id = category.category_id
-                                                  JOIN user ON wiki.creator_id = user.user_id WHERE wiki.status='published'";
+        $sql = "SELECT wiki.*, GROUP_CONCAT(tag.tag) AS tags, category.category, user.username
+            FROM wiki
+            JOIN wiki_tag ON wiki.wiki_id = wiki_tag.wiki_id
+            JOIN tag ON wiki_tag.tag_id = tag.tag_id
+            JOIN category ON wiki.cat_id = category.category_id
+            JOIN user ON wiki.creator_id = user.user_id
+            WHERE wiki.status = 'published'
+            GROUP BY wiki.wiki_id
+            ORDER BY wiki.updated_at DESC, wiki.created_at DESC
+            LIMIT 8;
+            ";
 
         $stmt = $db->prepare($sql);
         $stmt->execute();
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll();
+
     }
+
 
 
     /**

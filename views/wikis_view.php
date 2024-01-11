@@ -128,10 +128,10 @@
         $.ajax({
             type: "POST",
             url: "index.php?page=wikis",
-            data: {   action: 'getWikis'},
+            data: { action: 'getWikis'},
             success: function (data) {
-                let wikis = JSON.parse(data);
-
+                 let wikis = JSON.parse(data);
+                 console.log(wikis)
 
                 $('#wiki-table').empty();
 
