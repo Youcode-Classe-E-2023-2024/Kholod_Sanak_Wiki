@@ -5,6 +5,7 @@ if (isset($_GET["action"])) {
     if ($_GET["action"] === "Wikis") {
 
         $wikiInfo = $wikiModel->getAllWikiInfo();
+        //dd($wikiInfo);
         echo json_encode($wikiInfo);
         exit;
     }
