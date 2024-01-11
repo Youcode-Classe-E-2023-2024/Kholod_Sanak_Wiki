@@ -8,9 +8,9 @@
 
             <div class="sm:flex items-center bg-white rounded-lg overflow-hidden px-2 py-1 justify-between">
                 <select id="select" class="text-base text-gray-800 outline-none border-2 px-4 py-2 rounded-lg">
-                    <option value="com" selected>com</option>
-                    <option value="net">net</option>
-                    <option value="org">org</option>
+                    <option value="title" selected>title</option>
+                    <option value="category">category</option>
+                    <option value="tag">tag</option>
 
                 </select>
                 <div class="ms:flex items-center px-2 rounded-lg  mx-auto ">
