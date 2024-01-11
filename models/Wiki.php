@@ -101,7 +101,7 @@ class Wiki {
      */
     function getWikis() {
         global $db;
-        $sql = "SELECT * FROM wiki WHERE status = 'published'";
+        $sql = "SELECT * FROM wiki WHERE status = 'published' ORDER BY wiki_id DESC ";
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -112,7 +112,7 @@ class Wiki {
      */
     function getAllWikis(){
         global $db;
-        $sql= "SELECT * FROM wiki ";
+        $sql= "SELECT * FROM wiki ORDER BY wiki_id DESC  ";
         $stmt = $db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -134,18 +134,17 @@ class Wiki {
      * @return string
      */
     public function displayWiki($wikiId){
-         global $db;
+        global $db;
 
-         $sql = "SELECT * FROM wiki  WHERE wiki_id = :wiki_id";
+        $sql = "SELECT * FROM wiki JOIN user u on u.user_id = wiki.creator_id
+                WHERE wiki_id = :wiki_id";
 
-         $stmt = $db->prepare($sql);
-         $stmt->bindParam(':wiki_id', $wiki_id);
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':wiki_id', $wikiId);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
-         $stmt->execute();
-
-
-         return "success";
-     }
 
 
     /**
