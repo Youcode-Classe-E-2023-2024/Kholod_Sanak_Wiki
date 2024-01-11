@@ -1,7 +1,11 @@
 <?php
 class Category
 {
-    function addCategory($category)
+    /**
+     * @param $category
+     * @return bool
+     */
+    public function addCategory($category)
     {
         global $db;
         $sql = "INSERT INTO category (category) VALUES (:category)";
@@ -15,7 +19,12 @@ class Category
         return $success;
     }
 
-    function updateCategory($categoryId, $newCategory)
+    /**
+     * @param $categoryId
+     * @param $newCategory
+     * @return bool
+     */
+    public function updateCategory($categoryId, $newCategory)
     {
         global $db;
 
@@ -30,9 +39,10 @@ class Category
     }
 
 
-
-
-    function getCategories() {
+    /**
+     * @return array|false
+     */
+    public function getCategories() {
         global $db;
         $sql = "SELECT * FROM category";
         $stmt = $db->prepare($sql);
@@ -40,7 +50,20 @@ class Category
         return $stmt->fetchAll();
     }
 
-    function deleteCategory($categoryId)
+    public function getCategoriesCount() {
+        global $db;
+        $sql = "SELECT COUNT(*) as count FROM category";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count'];
+    }
+
+    /**
+     * @param $categoryId
+     * @return bool
+     */
+    public function deleteCategory($categoryId)
     {
         global $db;
 
