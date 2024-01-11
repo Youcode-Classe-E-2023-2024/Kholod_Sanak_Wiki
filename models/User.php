@@ -6,7 +6,7 @@ class User
      * @param $db
      * @return false|mixed
      */
-    function CheckUser($email, $db) {
+    public function CheckUser($email, $db) {
         $sql = "SELECT * FROM user WHERE email = :email";
 
         $stmt = $db->prepare($sql);
@@ -26,7 +26,7 @@ class User
      * @param $db
      * @return void
      */
-    function AddUser($email, $password, $username, $db) {
+    public function AddUser($email, $password, $username, $db) {
         $sql = "INSERT INTO user (email, password, username,role) VALUES (:email, :password, :username ,'auteur')";
         $stmt = $db->prepare($sql);
 
@@ -37,9 +37,11 @@ class User
     }
 
 
-
-
-    function updateUserRole($db) {
+    /**
+     * @param $db
+     * @return void
+     */
+    public function updateUserRole($db) {
         $sql = "UPDATE user SET role = 'admin' WHERE user_id = (SELECT user_id FROM user ORDER BY user_id LIMIT 1)";
         $stmt = $db->prepare($sql);
         $stmt->execute();
@@ -48,29 +50,46 @@ class User
         unset($stmt);
     }
 
+    /**
+     * @param $user_id
+     * @return void
+     */
     function loginAuthor ($user_id) {
         $_SESSION["user_id"] = $user_id;
         $_SESSION["login"] = true;
 //        header('Location: index.php?page=home');
     }
+
+    /**
+     * @param $user_id
+     * @return void
+     */
     function loginAdmin ($user_id) {
         $_SESSION["admin"] = true;
         $_SESSION["user_id"] = $user_id;
         $_SESSION["login"] = true;
        // header('Location: index.php?page=dashboard');
     }
+
+    /**
+     * @return void
+     */
     function logout () {
         session_destroy();
 
     }
 
-    function getUsers($db) {
-        $sql = "SELECT * FROM user";
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+//    /**
+//     * @param $db
+//     * @return mixed
+//     */
+//    function getUsers($db) {
+//        $sql = "SELECT * FROM user";
+//        $stmt = $db->prepare($sql);
+//        $stmt->execute();
+//
+//        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+//    }
 
 
 //    function adminAddUser($email, $password, $username, $db) {
