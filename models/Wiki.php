@@ -1,6 +1,15 @@
 <?php
 class Wiki {
-    function addWiki($title, $content, $tags, $category, $creator, $created_date) {
+    /**
+     * @param $title
+     * @param $content
+     * @param $tags
+     * @param $category
+     * @param $creator
+     * @param $created_date
+     * @return bool
+     */
+    public function addWiki($title, $content, $tags, $category, $creator, $created_date) {
         global $db;
         try {
             $sql = "INSERT INTO wiki (title, description, cat_id, creator_id, created_at, status) VALUES (:title, :content, :category, :creator, :created_date, 'published')";
@@ -25,7 +34,16 @@ class Wiki {
     }
 
 
-
+    /**
+     * @param $wiki_id
+     * @param $tags
+     * @param $title
+     * @param $content
+     * @param $category
+     * @param $creator
+     * @param $updated_date
+     * @return string
+     */
     function updateWiki($wiki_id, $tags, $title, $content, $category, $creator, $updated_date) {
         global $db;
 
@@ -49,6 +67,10 @@ class Wiki {
     }
 
 
+    /**
+     * @param $wiki_id
+     * @return bool
+     */
     function deleteWiki($wiki_id) {
         global $db;
         $sql = "DELETE FROM wiki WHERE wiki_id = :wiki_id";
@@ -59,6 +81,10 @@ class Wiki {
     }
 
 
+    /**
+     * @param $wikiId
+     * @return bool
+     */
     function archiveWiki($wikiId) {
         global $db;
 
@@ -70,6 +96,9 @@ class Wiki {
     }
 
 
+    /**
+     * @return array|false
+     */
     function getWikis() {
         global $db;
         $sql = "SELECT * FROM wiki WHERE status = 'published'";
@@ -78,6 +107,9 @@ class Wiki {
         return $stmt->fetchAll();
     }
 
+    /**
+     * @return array|false
+     */
     function getAllWikis(){
         global $db;
         $sql= "SELECT * FROM wiki ";
@@ -86,11 +118,68 @@ class Wiki {
         return $stmt->fetchAll();
     }
 
-    function getArchivedWikis() {
+//    /**
+//     * @return array|false
+//     */
+//    function getArchivedWikis() {
+//        global $db;
+//        $sql = "SELECT * FROM wiki WHERE status = 'archived'";
+//        $stmt = $db->prepare($sql);
+//        $stmt->execute();
+//        return $stmt->fetchAll();
+//    }
+
+    /**
+     * @param $wikiId
+     * @return string
+     */
+    public function displayWiki($wikiId){
+         global $db;
+
+         $sql = "SELECT * FROM wiki  WHERE wiki_id = :wiki_id";
+
+         $stmt = $db->prepare($sql);
+         $stmt->bindParam(':wiki_id', $wiki_id);
+
+         $stmt->execute();
+
+
+         return "success";
+     }
+
+
+    /**
+     * @return array|false
+     */
+    function getAllWikiInfo() {
         global $db;
-        $sql = "SELECT * FROM wiki WHERE status = archived";
+
+        $sql = "SELECT wiki.*, tag.*, category.*, user.* FROM wiki_tag
+                                                  JOIN wiki ON wiki_tag.wiki_id = wiki.wiki_id
+                                                  JOIN tag ON wiki_tag.tag_id = tag.tag_id
+                                                  JOIN category ON wiki.cat_id = category.category_id
+                                                  JOIN user ON wiki.creator_id = user.user_id WHERE wiki.status='published'";
+
         $stmt = $db->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
+    /**
+     * @return mixed
+     */
+    public function getWikisCount() {
+        global $db;
+        $sql = "SELECT COUNT(*) as count FROM wiki WHERE status = 'published'";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count'];
+    }
+
+
+
+
 }

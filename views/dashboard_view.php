@@ -111,10 +111,22 @@
                         <div class="col-span-12 mt-5">
                             <div class="bg-white shadow-lg p-4" id="chart"></div>
                         </div>
-                        <!-- how many posts have a user created -->
-<!--                        <div class="col-span-12 mt-5">-->
-<!--                            <div class="bg-white shadow-lg p-4"  id="chart1"></div>-->
-<!--                        </div>-->
+
+                        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+                        <script>
+                            // Your PHP data
+                            var jsonData = <?php echo $jsonData; ?>;
+
+                            // Include your external JavaScript file
+                            var script = document.createElement('script');
+                            script.src = 'assets/js/chart.js';
+                            script.onload = function() {
+                                // After the external script is loaded, initialize the chart
+                                initializeChart(jsonData);
+                            };
+                            document.head.appendChild(script);
+                        </script>
+
 
 
 

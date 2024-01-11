@@ -62,6 +62,17 @@ class Tag
         return $stmt->fetchAll();
     }
 
+
+    function getTagsCount() {
+        global $db;
+        $sql = "SELECT COUNT(*) as count FROM tag";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count'];
+    }
+
+
     /**
      * Delete a tag from the database.
      *
@@ -84,6 +95,11 @@ class Tag
         }
     }
 
+    /**
+     * @param $tag
+     * @param $wikiId
+     * @return void
+     */
     static function wiki_tag ($tag, $wikiId) {
         global $db;
         $sql = "INSERT INTO wiki_tag (tag_id, wiki_id) VALUES (:tag_id, :wiki_id)";
@@ -93,7 +109,12 @@ class Tag
         $stmt->execute();
     }
 
-    static function update_wiki_tag ($tag,$wikiId) {
+    /**
+     * @param $tag
+     * @param $wikiId
+     * @return void
+     */
+    static function update_wiki_tag ($tag, $wikiId) {
         global $db;
         $sql = "UPDATE wiki_tag  SET tag_id = :tag_id WHERE wiki_id= :wiki_id ";
         $stmt = $db->prepare($sql);
@@ -102,4 +123,14 @@ class Tag
 
         $stmt->execute();
     }
+
+    static function display_wiki_tag ($tag, $wikiId) {
+        global $db;
+        $sql = "SELECT * FROM wiki_tag WHERE wiki_id= :wiki_id ";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':tag_id', $tag);
+        $stmt->bindParam(':wiki_id', $wikiId);
+        $stmt->execute();
+    }
+
 }
