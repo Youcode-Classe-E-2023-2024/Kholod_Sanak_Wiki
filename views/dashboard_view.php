@@ -1,4 +1,13 @@
 <?php
+
+$wikiModel = new Wiki();
+$categoryModel = new Category();
+$tagModel = new Tag();
+
+
+$wikisNumber = $wikiModel->getWikisCount();
+$categoriesNumber = $categoryModel->getCategoriesCount();
+$tagsNumber = $tagModel->getTagsCount();
 ?>
 <div class="flex h-screen w-full bg-gray-800 " >
 
@@ -20,18 +29,18 @@
 
                 <!-- Search Input -->
                 <div class="flex justify-center  mt-2 mr-4">
-                    <div class="relative flex w-full flex-wrap items-stretch mb-3">
-                        <input type="search" placeholder="Search"
-                               class="form-input px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white rounded-lg text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pr-10" />
-                        <span
-                                class="z-10 h-full leading-snug font-normal  text-center text-gray-400 absolute bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1" fill="none"
-                                     viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                </svg>
-                            </span>
-                    </div>
+<!--                    <div class="relative flex w-full flex-wrap items-stretch mb-3">-->
+<!--                        <input type="search" placeholder="Search"-->
+<!--                               class="form-input px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white rounded-lg text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pr-10" />-->
+<!--                        <span-->
+<!--                                class="z-10 h-full leading-snug font-normal  text-center text-gray-400 absolute bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">-->
+<!--                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1" fill="none"-->
+<!--                                     viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
+<!--                                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />-->
+<!--                                </svg>-->
+<!--                            </span>-->
+<!--                    </div>-->
 
                 </div>
                 <!--logout-->
@@ -55,33 +64,36 @@
                                 <h2 class="mr-5 text-lg font-medium truncate">Dashboard</h2>
                             </div>
                             <div class="grid grid-cols-12 gap-6 mt-5">
+
+                                    <!-- wiki numbers -->
                                 <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
-                                   href="#">
+                                   href="index.php?page=wikis&wiki_list">
                                     <div class="p-5">
                                         <div class="flex justify-between">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-400"
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-yellow-400"
                                                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                       stroke-width="2"
-                                                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                                             </svg>
                                             <div
                                                     class="bg-green-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
-                                                <span class="flex items-center">Qte</span>
+                                                <span class="flex items-center">Nbr</span>
                                             </div>
                                         </div>
-
-                                        <!--product number -->
                                         <div class="ml-2 w-full flex-1 product_nbr">
+
                                             <div>
-                                                <div class="mt-3 text-3xl font-bold leading-8" id="posts_number">Loading...</div>
-                                                <div class="mt-1 text-base text-gray-600">Products</div>
+                                                <div class="mt-3 text-3xl font-bold leading-8" id="posts_number"><?php echo $wikisNumber  ?></div>
+                                                <div class="mt-1 text-base text-gray-600">Wikis</div>
                                             </div>
                                         </div>
                                     </div>
                                 </a>
+
+                                    <!-- Tag numbers -->
                                 <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
-                                   href="#">
+                                   href="index.php?page=tags&tag_list">
                                     <div class="p-5">
                                         <div class="flex justify-between">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-yellow-400"
@@ -97,11 +109,36 @@
                                         </div>
                                         <div class="ml-2 w-full flex-1 user_nbr">
                                             <div>
-                                                <div class="mt-3 text-3xl font-bold leading-8" id="users_number">Loading...</div>
-                                                <div class="mt-1 text-base text-gray-600">Users</div>
+                                                <div class="mt-3 text-3xl font-bold leading-8" id="users_number"><?php echo $tagsNumber?></div>
+                                                <div class="mt-1 text-base text-gray-600">Tags</div>
                                             </div>
                                         </div>
                                     </div>
+                                </a>
+
+                                <!-- Category numbers -->
+                                <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
+                                   href="index.php?page=categories&category_list">
+                                <div class="p-5">
+                                    <div class="flex justify-between">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-yellow-400"
+                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                  stroke-width="2"
+                                                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                        </svg>
+                                        <div
+                                                class="bg-blue-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
+                                            <span class="flex items-center">Nbr</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-2 w-full flex-1 user_nbr">
+                                        <div>
+                                            <div class="mt-3 text-3xl font-bold leading-8" id="users_number"><?php echo $categoriesNumber?></div>
+                                            <div class="mt-1 text-base text-gray-600">Categories</div>
+                                        </div>
+                                    </div>
+                                </div>
                                 </a>
 
                             </div>
@@ -114,7 +151,6 @@
 
                         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
                         <script>
-                            // Your PHP data
                             var jsonData = <?php echo $jsonData; ?>;
 
                             // Include your external JavaScript file
