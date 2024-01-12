@@ -48,7 +48,7 @@ function addWiki() {
                 getWikis();
             } else if(data=== "Failed to add Wiki"){
                 alert(data);
-            } else if(data === "Please enter a valid Wiki title"){
+            } else if(data === "Please enter a Wiki title and description"){
                 alert(data);
             }else if(data === "Error in POST request"){
                 alert (data);
