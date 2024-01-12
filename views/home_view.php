@@ -17,40 +17,29 @@
             <div class="p-4 lg:w-1/3 w-full lg:w-1/3 px-3">
                 <!-- topics -->
                 <div class="mb-4">
-                    <h5 class="font-bold text-lg uppercase text-gray-700 px-1 mb-2"> Popular Categories </h5>
+                    <h5 class="font-bold text-lg uppercase text-gray-700 px-1 mb-2"> Latest Categories </h5>
                     <ul>
+                        <?php
+                        $categoryModel = new Category();
+                        $categories = $categoryModel->getLatestCategories();
+                        $wikiModel = new Wiki();
+                        foreach ($categories as $category):
+                            $wikiNbr= $wikiModel->getWikisCountByCategory($category["category_id"])
+
+
+                            ?>
+
                         <li class="px-1 py-4 border-b border-t border-white hover:border-gray-200 transition duration-300">
                             <a href="#" class="flex items-center text-gray-600 cursor-pointer">
                                 <span class="inline-block h-4 w-4 bg-green-300 mr-3"></span>
-                                Nutrition
-                                <span class="text-gray-500 ml-auto">23 articles</span>
+                                <?php echo $category["category"] ?>
+
+                                <span class="text-gray-500 ml-auto"><?php  echo $wikiNbr?> Wikis</span>
                                 <i class='text-gray-500 bx bx-right-arrow-alt ml-1'></i>
                             </a>
                         </li>
-                        <li class="px-1 py-4 border-b border-t border-white hover:border-gray-200 transition duration-300">
-                            <a href="#" class="flex items-center text-gray-600 cursor-pointer">
-                                <span class="inline-block h-4 w-4 bg-indigo-300 mr-3"></span>
-                                Food & Diet
-                                <span class="text-gray-500 ml-auto">18 articles</span>
-                                <i class='text-gray-500 bx bx-right-arrow-alt ml-1'></i>
-                            </a>
-                        </li>
-                        <li class="px-1 py-4 border-b border-t border-white hover:border-gray-200 transition duration-300">
-                            <a href="#" class="flex items-center text-gray-600 cursor-pointer">
-                                <span class="inline-block h-4 w-4 bg-yellow-300 mr-3"></span>
-                                Workouts
-                                <span class="text-gray-500 ml-auto">34 articles</span>
-                                <i class='text-gray-500 bx bx-right-arrow-alt ml-1'></i>
-                            </a>
-                        </li>
-                        <li class="px-1 py-4 border-b border-t border-white hover:border-gray-200 transition duration-300">
-                            <a href="#" class="flex items-center text-gray-600 cursor-pointer">
-                                <span class="inline-block h-4 w-4 bg-blue-300 mr-3"></span>
-                                Immunity
-                                <span class="text-gray-500 ml-auto">9 articles</span>
-                                <i class='text-gray-500 bx bx-right-arrow-alt ml-1'></i>
-                            </a>
-                        </li>
+
+                        <?php endforeach; ?>
                     </ul>
                 </div>
             </div>
