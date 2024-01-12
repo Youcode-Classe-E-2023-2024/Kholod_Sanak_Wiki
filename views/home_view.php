@@ -7,11 +7,18 @@
 <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-wrap ">
-            <div class="p-4 lg:w-2/3 w-full lg:w-2/3 px-3" id="wikiContainer">
+            <div class="p-4 lg:w-2/3 w-full lg:w-2/3 px-3" >
+                <div id="wikiContainer">
+                    <!-- wiki section-->
+                </div>
 
-                <!-- wiki section-->
+                <div  id="search-results-container">
+                    <!-- search container -->
+                </div>
 
             </div>
+
+
 
             <!-- right sidebar -->
             <div class="p-4 lg:w-1/3 w-full lg:w-1/3 px-3">
@@ -21,7 +28,7 @@
                     <ul>
                         <?php
                         $categoryModel = new Category();
-                        // display the latest category that an article has been added to 
+                        // display the latest category that an article has been added to
                        // $categories = $categoryModel->getLatestCategories();
                         $categories = $categoryModel->getCategories();
                         $wikiModel = new Wiki();
@@ -53,4 +60,10 @@
 
 
 <script src="<?= PATH ?>assets/js/homepage.js"></script>
+<script>
+
+
+
+
+</script>
 

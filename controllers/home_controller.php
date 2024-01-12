@@ -1,9 +1,6 @@
 <?php
 
 
-
-
-
 if (isset($_GET["action"])) {
     $wikiModel = new Wiki();
 
@@ -24,6 +21,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 }
+
+/////////////////////////          search
+if (isset($_GET["input_value"]) && isset($_GET["search_type"])) {
+    $input_value = $_GET["input_value"];
+    //dd($input_value);
+    $searchType = $_GET["search_type"];
+    //dd($searchType);
+    $searchArray = [];
+    $searchedData = [];
+    $searchedData = Search::searchForTitles($input_value);
+    //dd($searchedData);
+
+    if ($searchType === "title") {
+        $searchedData = Search::searchForTitles($input_value);
+        //var_dump($searchedData);
+    } elseif ($searchType === "tag") {
+        $searchedData = Search::searchForTags($input_value);
+    } elseif ($searchType === "category") {
+        $searchedData = Search::searchForCategory($input_value);
+
+    }
+
+    if ($searchedData !== null) {
+        foreach ($searchedData as $data) {
+            $wikiTags = Tag::get_wiki_tag($data["wiki_id"]);
+
+            $searchArray[] = [
+                "tags" => $wikiTags,
+                "wiki_infos" => $data
+            ];
+        }
+    }
+
+    echo json_encode($searchArray);
+    exit;
+}
+
+
 //if (empty($_SESSION['user_id'])) {
 //    header('location: index.php?page=home');
 //}

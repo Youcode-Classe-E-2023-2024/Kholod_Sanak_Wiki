@@ -5,16 +5,15 @@
 
     <div class="min-h-screen flex justify-center items-center">
         <form>
-
             <div class="sm:flex items-center bg-white rounded-lg overflow-hidden px-2 py-1 justify-between">
-                <select id="select" class="text-base text-gray-800 outline-none border-2 px-4 py-2 rounded-lg">
+                <select id="search-type" class="text-base text-gray-800 outline-none border-2 px-4 py-2 rounded-lg">
                     <option value="title" selected>title</option>
                     <option value="category">category</option>
                     <option value="tag">tag</option>
 
                 </select>
                 <div class="ms:flex items-center px-2 rounded-lg  mx-auto ">
-                    <input class="text-base text-gray-400 flex-grow outline-none px-4  focus-within:shadow-lg" type="text" placeholder="Search ..." />
+                    <input id="search-input"" class="text-base text-gray-400 flex-grow outline-none px-4  focus-within:shadow-lg" type="text" placeholder="Search ..." />
 
                     <button >
                         <div class="grid place-items-center h-full w-12 text-gray-300">
