@@ -133,4 +133,14 @@ class Tag
         $stmt->execute();
     }
 
+    static function get_wiki_tag($wiki_id) {
+        global $db;
+        $sql = "SELECT GROUP_CONCAT(tag.tag)AS tags FROM wiki_tag
+                JOIN tag ON wiki_tag.tag_id = tag.tag_id
+                WHERE wiki_tag.wiki_id = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$wiki_id]);
+        return $stmt->fetchAll();
+    }
+
 }
