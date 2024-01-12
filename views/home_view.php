@@ -21,7 +21,8 @@
                     <ul>
                         <?php
                         $categoryModel = new Category();
-                        $categories = $categoryModel->getLatestCategories();
+                       // $categories = $categoryModel->getLatestCategories();
+                        $categories = $categoryModel->getCategories();
                         $wikiModel = new Wiki();
                         foreach ($categories as $category):
                             $wikiNbr= $wikiModel->getWikisCountByCategory($category["category_id"])
