@@ -76,4 +76,26 @@ class Category
     }
 
 
+    public function getLatestCategories()
+    {
+        global $db;
+
+        $sql = "
+            SELECT c.category_id, 
+               c.category, 
+               GREATEST(MAX(c.created_at), MAX(w.created_at)) as latest_timestamp
+                FROM Category c
+                LEFT JOIN Wiki w ON c.category_id = w.cat_id
+                GROUP BY c.category_id, c.category
+                ORDER BY latest_timestamp DESC
+                LIMIT   10;
+        ";
+
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
 }
