@@ -1,4 +1,9 @@
 <?php
+
+
+
+
+
 if (isset($_GET["action"])) {
     $wikiModel = new Wiki();
 
