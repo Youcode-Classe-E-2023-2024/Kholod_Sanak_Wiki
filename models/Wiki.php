@@ -146,6 +146,18 @@ class Wiki {
     }
 
 
+    public function getWikisCountByCategory($categoryId) {
+        global $db;
+        $sql = "SELECT COUNT(*) as wikiCount FROM wiki WHERE cat_id = :categoryId";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':categoryId', $categoryId, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['wikiCount'];
+    }
+
+
+
 
     /**
      * @return array|false
