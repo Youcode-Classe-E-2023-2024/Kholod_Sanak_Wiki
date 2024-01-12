@@ -21,6 +21,7 @@
                     <ul>
                         <?php
                         $categoryModel = new Category();
+                        // display the latest category that an article has been added to 
                        // $categories = $categoryModel->getLatestCategories();
                         $categories = $categoryModel->getCategories();
                         $wikiModel = new Wiki();
