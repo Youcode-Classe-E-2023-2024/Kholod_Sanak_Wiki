@@ -30,16 +30,16 @@ if (isset($_GET["input_value"]) && isset($_GET["search_type"])) {
     //dd($searchType);
     $searchArray = [];
     $searchedData = [];
-    $searchedData = Search::searchForTitles($input_value);
+    $searchedData = Wiki::searchForTitles($input_value);
     //dd($searchedData);
 
     if ($searchType === "title") {
-        $searchedData = Search::searchForTitles($input_value);
+        $searchedData = Wiki::searchForTitles($input_value);
         //var_dump($searchedData);
     } elseif ($searchType === "tag") {
-        $searchedData = Search::searchForTags($input_value);
+        $searchedData = Wiki::searchForTags($input_value);
     } elseif ($searchType === "category") {
-        $searchedData = Search::searchForCategory($input_value);
+        $searchedData = Wiki::searchForCategory($input_value);
 
     }
 
