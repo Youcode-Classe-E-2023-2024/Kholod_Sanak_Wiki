@@ -57,12 +57,4 @@ function generateWikiCard(wikiData) {
 }
 
 
-//////////////////////////////////////////        Display wiki content
-// $(document).on("click", "#link_to_wiki", function() {
-//     //console.log("link clicked");
-//     let wikiId = $(this).data('wiki-id');
-//     displayWiki(wikiId);
-//
-//
-//
-// });
+
