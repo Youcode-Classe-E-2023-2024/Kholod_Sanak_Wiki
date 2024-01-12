@@ -14,7 +14,7 @@
                     <div class="">
                         <img class="hidden h-24 w-24 rounded-full sm:block object-cover mr-2 border-4 border-green-400"
                              src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="">
-                        <p class="font-bold text-base  text-gray-400 pt-2 text-center w-24">Username</p>
+                        <p class="font-bold text-base  text-gray-400 pt-2 text-center w-24">Admin</p>
                     </div>
                 </div>
                 <div>
