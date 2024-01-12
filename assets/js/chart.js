@@ -18,6 +18,6 @@ function initializeChart(jsonData) {
     // Initialize the chart
     var chart = new ApexCharts(document.querySelector("#chart"), options);
 
-    // Render the chart
     chart.render();
 }
+
